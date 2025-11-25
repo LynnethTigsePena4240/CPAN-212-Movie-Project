@@ -1,0 +1,175 @@
+
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #CBF3F0;
+  color: #1D2F6F;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #1D2F6F;
+  margin-bottom: 20px;
+}
+
+.title{
+  color: #ffffff;
+}
+
+.form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  color: #1D2F6F;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input :focus{
+  border-color: #8B95C9;
+  outline: none;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #EF233C;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #c91530;
+}
+
+header {
+  background-color: #1D2F6F;
+  padding: 1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+nav ul li {
+  display: inline;
+  margin-right: 1rem;
+}
+
+nav ul li a {
+  color: #FFC6AC; /* Apricot text links */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav ul li a:hover{
+  color: #EF233C;
+}
+
+
+footer {
+  background-color: #1D2F6F;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  color: white;
+}
+
+.table-container {
+  margin: 20px auto;
+  width: 80%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+thead {
+  background-color: #8B95C9;
+  color: white;
+}
+
+th {
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.update-btn {
+  padding: 5px 10px;
+  background-color: #1D2F6F; /* Green */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background-color: #16305a;
+}
+
+/* Delete Button */
+.delete-btn {
+  padding: 5px 10px;
+  background-color: #EF233C; /* Red */
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c91530;
+}

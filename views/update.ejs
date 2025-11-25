@@ -1,0 +1,34 @@
+<%- include('partials/header', { title: 'Update Movie' }) %>
+
+<h1>Update Movie Information</h1>
+<div class="form-container">
+   <form action="/update/<%= movie._id %>" method="POST">
+        <div>
+           <label for="movieName">Movie Name:</label>
+           <input type="text" id="movieName" name="movieName" value="<%= movie.movieName %>" required>
+       </div>
+       <div>
+           <label for="movieDescript">Movie Description:</label>
+           <input type="text" id="movieDescript" name="movieDescript" value="<%= movie.movieDescript %>" required>
+       </div>
+
+       <div>
+           <label for="year">Year:</label>
+           <input type="text" id="year" name="year" value="<%= movie.year %>" required>
+       </div>
+
+       <div>
+           <label for="genres">Genres:</label>
+           <input type="text" id="genres" name="genres" value="<%= movie.genres %>" required>
+       </div>
+
+       <div>
+           <label for="rating">Rating:</label>
+           <input type="text" id="rating" name="rating" value="<%= movie.rating %>" required>
+       </div>
+
+       <button type="submit" class="submit-btn">Update Movie</button>
+   </form>
+</div>
+
+<%- include('partials/footer') %>
