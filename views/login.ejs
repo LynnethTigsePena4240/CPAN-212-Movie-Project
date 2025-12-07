@@ -1,0 +1,33 @@
+<%- include('partials/header', { title: 'Login' }) %>
+
+<h1>Login</h1>
+<div class="form-container">
+    <form action="/login" method="post">
+
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Type your username" required>
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Type your password" required>
+        </div>
+
+         <% if (typeof error !== "undefined") { %>
+             <div class="error-message"><%= error %></div>
+         <% } %>
+
+
+        <button type="submit" class="login-btn">Login</button>
+        
+    </form>
+
+    <form action="/registration" method="get">
+
+    <button type="submit" class="register-btn">Register</button>
+
+    </form>
+</div>
+
+<%- include('partials/footer') %>

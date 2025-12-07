@@ -5,6 +5,7 @@ const path = require("path")
 const mongoose = require('mongoose')
 
 const Movie = require("./models/movies");
+//const registration = require("./models/registration")
 
 const PORT = process.env.PORT || 8000
 
@@ -23,6 +24,21 @@ app.use(express.static(path.join(__dirname, "public")))
 // Middleware to parse JSON and URL-encoded data
 app.use(express.json()); // For parsing JSON
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded data from forms
+
+const session = require("express-session");
+
+app.use(session({
+    secret: "yourSecretKey", // change this to a strong secret
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
+
+
 //req.body
 app.get("/", (req,res) => {
     // serve the EJS template movielist.ejs as default page
@@ -32,6 +48,7 @@ app.get("/", (req,res) => {
 app.get("/insert", (req,res) => {
   return res.render("insert.ejs")
 })
+
 
 //recive data from html form and save in mongodb
 //async, await operation
@@ -143,6 +160,77 @@ app.post("/update/:id", async (req,res)=>{
        console.log(`No matching object found`);
    }
 })
+
+const registration = require("./models/registration")
+
+// route for registration 
+app.get("/registration", (req,res) => {
+  return res.render("registration.ejs")
+})
+
+app.post("/registration", async (req, res) => {
+    console.log(req.body);
+
+    try {
+        if (req.body.password !== req.body.confirmPassword) {
+            return res.render("registration.ejs", {
+                error: "Passwords do not match"
+            });
+        }
+
+        const registrationForm = new registration({
+            UserName: req.body.username,
+            password: req.body.password
+        });
+
+        await registrationForm.save();
+        res.redirect("/login");
+    } catch (e) {
+        console.log(e);
+        res.render("registration.ejs", {
+            error: "Error registering user"
+        });
+    }
+});
+
+
+// route for login 
+app.get("/login", (req,res) => {
+    console.log("opening login page");
+    return res.render("login.ejs")
+})
+
+
+app.post("/login", async (req, res) => {
+    const user = await registration.findOne({
+        UserName: req.body.username,
+        password: req.body.password
+    });
+
+    if (!user) {
+        return res.render("login.ejs", {
+            error: "Invalid username or password"
+        });
+    }
+
+    req.session.user = user;
+    res.redirect("/movielist");
+
+});
+
+// logout 
+app.post("/logout", (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).send("Error logging out");
+        }
+        res.redirect("/login");
+    });
+});
+
+
+
+
 
 //helper function to connect to MongoDB asychronously
 const connectDB = async() => {

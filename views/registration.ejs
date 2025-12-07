@@ -1,0 +1,30 @@
+<%- include('partials/header', { title: 'Registration' }) %>
+
+<h1>Registration</h1>
+<div class="form-container">
+    <form action="/registration" method="post">
+
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Type your username" required>
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Type your password" required>
+        </div>
+
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-type your password" required>
+        </div>
+
+        <% if (typeof error !== "undefined") { %>
+             <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <button type="submit" class="register-btn">Register</button>
+    </form>
+</div>
+
+<%- include('partials/footer') %>

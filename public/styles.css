@@ -60,22 +60,58 @@ input :focus{
   outline: none;
 }
 
-.submit-btn {
-  width: 100%;
+/* login  Button */
+.login-btn {
+  width: 80%;
+  margin:10px;
   padding: 12px;
   font-size: 18px;
   color: #fff;
-  background-color: #EF233C;
+  background-color: #115cac;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.submit-btn:hover {
-  background-color: #c91530;
+.login-btn:hover {
+  background-color: #4080a5;
 }
 
+/*Logout Button*/
+.logout-btn{
+width:8%; 
+padding:4px;
+background-color: #3171b5;
+border-color: #3171b5;
+color:#c5c6c9; 
+font-size: 14px;
+font-weight: bold;
+border-radius: 8px;
+}
+
+.logout-btn:hover{
+background-color: #4080a5;
+
+}
+/* registration Button */
+.register-btn {
+  width: 80%;
+  margin: 10px;
+  padding: 12px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #4c783d;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.register-btn:hover {
+  background-color: #5cac60;
+}
 header {
   background-color: #1D2F6F;
   padding: 1rem;
@@ -149,6 +185,7 @@ tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+/* update Button */
 .update-btn {
   padding: 5px 10px;
   background-color: #1D2F6F; /* Green */
@@ -183,4 +220,11 @@ textarea{
   font-size: 16px;
   box-sizing: border-box;
   transition: border-color 0.3s;
+}
+
+.error-message { 
+  padding:10px;
+  text-align: left;
+  color: #c91530;
+  text-decoration: wavy;
 }

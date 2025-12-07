@@ -7,12 +7,21 @@
     <link rel="stylesheet" href="/styles.css" >
 </head>
 <body>
-    <header>
+    <header> 
         <h1 class="title">CPAN 212 Project</h1>
         <nav>
             <ul>
                 <li><a href="/movielist">List of Movies</a></li>
                 <li><a href="/insert">Add New Movie</a></li>
+                <% if (session.user) { %>
+                    <li>
+                        <form action="/logout" method="POST" style="display:inline;">
+                            <button type="submit" class="logout-btn">Logout</button>
+                        </form>
+                    </li>
+                <% } else { %>
+                    <li><a href="/login">Login</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>
