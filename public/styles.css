@@ -1,236 +1,219 @@
-@media screen and (max-width: 768px) {
-  .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #CBF3F0;
-  color: #1D2F6F;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #1b1b1b;
   margin: 0;
   padding: 0;
 }
 
 h1 {
   text-align: center;
-  color: #1D2F6F;
-  margin-bottom: 20px;
+  font-size: 3rem;
+  margin: 30px 0 15px;
+  color: #1a3d7c;       
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .title {
-  color: #ffffff;
+  color: #f5c518;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.form-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-  color: #1D2F6F;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
-}
-
-input :focus {
-  border-color: #8B95C9;
-  outline: none;
-}
-
-/* login  Button */
-.login-btn {
-  width: 80%;
-  margin: 10px;
-  padding: 12px;
-  font-size: 18px;
-  color: #fff;
-  background-color: #115cac;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-btn:hover {
-  background-color: #4080a5;
-}
-
-/*Logout Button*/
-.logout-btn {
-  width: 8%;
-  padding: 4px;
-  background-color: #3171b5;
-  border-color: #3171b5;
-  color: #c5c6c9;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 8px;
-}
-
-.logout-btn:hover {
-  background-color: #4080a5;
-
-}
-
-/* registration Button */
-.register-btn {
-  width: 80%;
-  margin: 10px;
-  padding: 12px;
-  font-size: 18px;
-  color: #fff;
-  background-color: #4c783d;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-}
-
-.register-btn:hover {
-  background-color: #5cac60;
-}
 
 header {
-  background-color: #1D2F6F;
+  background-color: #1a3d7c;
   padding: 1rem;
   text-align: center;
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
-
 
 nav ul {
   list-style: none;
   padding: 0;
+  margin: 8px 0 0;
 }
 
-
 nav ul li {
-  display: inline;
-  margin-right: 1rem;
+  display: inline-block;
+  margin: 0 0.8rem;
 }
 
 nav ul li a {
-  color: #FFC6AC;
-  /* Apricot text links */
+  color: #f5c518; 
   text-decoration: none;
   font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
 nav ul li a:hover {
-  color: #EF233C;
-}
-
-
-footer {
-  background-color: #1D2F6F;
-  padding: 1rem;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  left: 0;
   color: white;
 }
 
+
+.form-container {
+  max-width: 600px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #d6d9df;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+label {
+  font-weight: 600;
+  color: #5e6a7d;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 3px;
+  border: 1px solid #d6d9df;
+  border-radius: 5px;
+  background-color: #fafbfd;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1a3d7c;
+  box-shadow: 0 0 0 2px rgba(26, 61, 124, 0.2);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #1a3d7c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #152f60;
+}
+
 .table-container {
-  margin: 20px auto;
-  width: 80%;
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto 80px;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
   background-color: #ffffff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-table,
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 thead {
-  background-color: #8B95C9;
+  background-color: #1a3d7c;
   color: white;
 }
 
-th {
-  font-weight: bold;
+th,
+td {
+  padding: 14px;
+  border-bottom: 1px solid #d6d9df;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+tbody tr:hover {
+  background-color: #eef2f7;
 }
 
-/* update Button */
-.update-btn {
-  padding: 5px 10px;
-  background-color: #1D2F6F;
-  /* Green */
-  color: white;
+.movie-title {
+  font-weight: 900;        
+  font-size: 1.25rem;
+  color: #1a3d7c;           
+  letter-spacing: 0.3px;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.movie-title:hover {
+  color: #d4a912;
+  cursor: default;
+}
+
+.rating-pill {
+  padding: 5px 12px;
+  background-color: #f5c518; 
+  color: black;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.update-btn,
+.delete-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.update-btn {
+  background-color: #2a9d8f;
+  color: white;
 }
 
 .update-btn:hover {
-  background-color: #16305a;
+  background-color: #1f7c70;
 }
 
-/* Delete Button */
 .delete-btn {
-  padding: 5px 10px;
-  background-color: #EF233C;
-  /* Red */
+  background-color: #e63946;
   color: white;
-  border: none;
-  cursor: pointer;
 }
 
 .delete-btn:hover {
-  background-color: #c91530;
+  background-color: #c42533;
 }
 
-textarea {
+footer {
+  background-color: #1a3d7c;
+  color: #ffffff;
+  text-align: center;
+  padding: 0.8rem;
+  position: fixed;
+  bottom: 0;
   width: 100%;
-  padding: 10px;
-  margin: 5px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
+  font-size: 0.9rem;
 }
 
-.error-message {
-  padding: 10px;
-  text-align: left;
-  color: #c91530;
-  text-decoration: wavy;
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  .movie-title {
+    font-size: 1.05rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
 }
