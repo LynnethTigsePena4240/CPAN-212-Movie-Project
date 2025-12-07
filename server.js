@@ -38,38 +38,78 @@ app.use((req, res, next) => {
     next();
 });
 
+// Checks if ANY user is logged in
+const isLoggedIn = (req, res, next) => {
+    if (!req.session.user) {
+        console.log("Access denied: Not logged in");
+        return res.redirect("/login");
+    }
+    next();
+};
+
+// Checks if the logged-in user OWNS the movie
+const isOwner = async (req, res, next) => {
+    if (!req.session.user) {
+        console.log("Ownership check failed: Not logged in");
+        return res.redirect("/login");
+    }
+
+    const { id } = req.params;
+
+    try {
+        const movie = await Movie.findById(id);
+
+        if (!movie) {
+            console.log(`Ownership check failed: Movie ID ${id} not found.`);
+            return res.redirect("/movielist");
+        }
+
+        if (movie.postedBy.toString() === req.session.user._id.toString()) {
+            return next();
+        } else {
+            console.log("Ownership check failed: User is not the owner.");
+            return res.redirect("/movielist");
+        }
+    } catch (e) {
+        console.error("Error during isOwner middleware:", e);
+        return res.redirect("/movielist");
+    }
+};
+
 
 //req.body
-app.get("/", (req,res) => {
+app.get("/", (req, res) => {
     // serve the EJS template movielist.ejs as default page
     res.redirect("/movielist")
 })
 
-app.get("/insert", (req,res) => {
-  return res.render("insert.ejs")
+// Restricted to logged-in users
+app.get("/insert", isLoggedIn, (req, res) => {
+    return res.render("insert.ejs")
 })
 
 
-//recive data from html form and save in mongodb
-//async, await operation
-app.post("/insert",async (req,res)=>{
+// Restricted to logged-in users and saves user ID
+app.post("/insert", isLoggedIn, async (req, res) => {
     console.log(req.body)
-    try{
+    try {
         const movieToInsert = Movie(
             {
                 movieName: req.body.movieName,
                 movieDescript: req.body.movieDescript,
-                year:req.body.year,
+                year: req.body.year,
                 genres: req.body.genres,
-                rating: req.body.rating
-             })
-             console.log(movieToInsert)
-             //mongodb insert document collection
-             await movieToInsert.save();
-             res.redirect("/movielist");
+                rating: req.body.rating,
+                postedBy: req.session.user._id
+            })
+        console.log(movieToInsert)
+        //mongodb insert document collection
+        await movieToInsert.save();
+        res.redirect("/movielist");
     }
-    catch(e){
+    catch (e) {
         console.log(e)
+        res.redirect("/insert");
     }
 })
 
@@ -80,92 +120,95 @@ app.get('/movielist', async (req, res) => {
         console.log(`getting all movies`);
         const movies = await Movie.find();
 
-        return res.render("movielist.ejs",{movielist:movies})
+        return res.render("movielist.ejs", { movielist: movies })
     } catch (error) {
         res.status(500).send(error);
     }
 });
 
-app.post("/delete/:id", async(req,res)=>{
-    try{
+// Restricted to the movie owner
+app.post("/delete/:id", isOwner, async (req, res) => {
+    try {
         const iddelete = req.params.id;
         const deletedmovie = await Movie.findByIdAndDelete(iddelete)
         res.redirect("/movielist")
     }
-    catch(e)
-    {
-
+    catch (e) {
+        console.error("Error deleting movie:", e);
+        res.redirect("/movielist");
     }
 })
 
 //GET endpoint to show update page with existing data
-app.get('/update/:id', async (req, res) => {
-   try {
-       if (req.params.id){
-           //retrieve existing document by id
-           const movie = await Movie.findById(req.params.id);
+// Restricted to the movie owner
+app.get('/update/:id', isOwner, async (req, res) => {
+    try {
+        if (req.params.id) {
+            //retrieve existing document by id
+            const movie = await Movie.findById(req.params.id);
 
 
-           //re-render the update page to show existing data on HTML Form
-           res.render('update', { movie });
-       }else{
-           console.log(`No ID available`);
-          
-       }
+            //re-render the update page to show existing data on HTML Form
+            res.render('update', { movie });
+        } else {
+            console.log(`No ID available`);
+            res.redirect("/movielist");
+        }
 
-   } catch (error) {
-     console.error("Error fetching movie:", error);
-     res.status(500).send("Error fetching movie data");
-   }
+    } catch (error) {
+        console.error("Error fetching movie:", error);
+        res.status(500).send("Error fetching movie data");
+    }
 });
 
 //POST endpoint to receive updated data and save it to database
-app.post("/update/:id", async (req,res)=>{
+// Restricted to the movie owner
+app.post("/update/:id", isOwner, async (req, res) => {
 
-   //receive the document ID to update
-   const idToUpdate = req.params.id;
-  
-   if (idToUpdate){
-       console.log(`BookID to update : ${req.params.id}`)
+    //receive the document ID to update
+    const idToUpdate = req.params.id;
 
-       try {
-           // updates the document with the values provided in the form
-           const updatedMovie = await Movie.findByIdAndUpdate(
-               idToUpdate,
-               {
-                   //list the fields to update
-                   movieName: req.body.movieName,
-                   movieDescript: req.body.movieDescript,
-                   year: req.body.year,
-                   genres: req.body.genres,
-                   rating: req.body.rating
-               },
-               {new:true}
-           )
+    if (idToUpdate) {
+        console.log(`BookID to update : ${req.params.id}`)
 
-           //check if matching document is found
-           if (!updatedMovie) {
-               return res.status(404).send("Movie not found");
-           }else{
-               console.log(`Successfully Updated : ${JSON.stringify(updatedMovie)}`);
-           }
+        try {
+            // updates the document with the values provided in the form
+            const updatedMovie = await Movie.findByIdAndUpdate(
+                idToUpdate,
+                {
+                    //list the fields to update
+                    movieName: req.body.movieName,
+                    movieDescript: req.body.movieDescript,
+                    year: req.body.year,
+                    genres: req.body.genres,
+                    rating: req.body.rating
+                },
+                { new: true }
+            )
 
-           //redirect to  movie list to show updated information
-           res.redirect("/movielist")
-       } catch(err) {
-           console.log(`Unable to update movie : ${err}`);
-           return res.send(err)
-       }   
-   }else{
-       console.log(`No matching object found`);
-   }
+            //check if matching document is found
+            if (!updatedMovie) {
+                return res.status(404).send("Movie not found");
+            } else {
+                console.log(`Successfully Updated : ${JSON.stringify(updatedMovie)}`);
+            }
+
+            //redirect to  movie list to show updated information
+            res.redirect("/movielist")
+        } catch (err) {
+            console.log(`Unable to update movie : ${err}`);
+            return res.send(err)
+        }
+    } else {
+        console.log(`No matching object found`);
+    }
 })
 
 const registration = require("./models/registration")
 
 // route for registration 
-app.get("/registration", (req,res) => {
-  return res.render("registration.ejs")
+app.get("/registration", (req, res) => {
+    return res.render("registration.ejs")
 })
 
 app.post("/registration", async (req, res) => {
@@ -195,7 +238,7 @@ app.post("/registration", async (req, res) => {
 
 
 // route for login 
-app.get("/login", (req,res) => {
+app.get("/login", (req, res) => {
     console.log("opening login page");
     return res.render("login.ejs")
 })
@@ -229,22 +272,19 @@ app.post("/logout", (req, res) => {
 });
 
 
-
-
-
 //helper function to connect to MongoDB asychronously
-const connectDB = async() => {
-    try{
+const connectDB = async () => {
+    try {
         console.log(`Attempting to connect to DB`);
 
         //use mongoose.connect() function to establish connection to MongoDB cluster
         mongoose.connect(CONNECTION_STRING)
-        .then(() => console.log(`Database connection established successfully.`))
-        .catch( (err) => 
-            console.log(`Can't established database connection : ${JSON.stringify(err)}`))
-    }catch(error){
+            .then(() => console.log(`Database connection established successfully.`))
+            .catch((err) =>
+                console.log(`Can't established database connection : ${JSON.stringify(err)}`))
+    } catch (error) {
         console.log(`Unable to connect to DB : ${error.message}`);
-        
+
     }
 }
 
@@ -256,4 +296,3 @@ const onServerStart = () => {
     connectDB()
 }
 app.listen(PORT, onServerStart)
- 

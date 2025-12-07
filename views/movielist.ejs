@@ -1,7 +1,7 @@
 <%- include('partials/header', { title: 'Movie List' }) %>
 
-<h1>Movie List</h1>
-<div class="table-container">
+    <h1>Movie List</h1>
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
@@ -15,29 +15,51 @@
                 </tr>
             </thead>
             <tbody>
-                <% movielist.forEach(movie=>{%>
+                <% movielist.forEach(movie=> {%>
                     <tr>
-                        <td><%= movie.movieName %></td>
-                        <td><%= movie.movieDescript %></td>
-                        <td><%= movie.year %></td>
-                        <td><%= movie.genres %></td>
-                        <td><%= movie.rating %></td>
-                       
                         <td>
-                            <form action="/update/<%=movie.id %>" method ="get">
-                               <button type="submit" class="update-btn">Update</button> 
-                            </form>
+                            <%= movie.movieName %>
                         </td>
                         <td>
-                            <form action ="/delete/<%= movie._id %>" method="post"
-                            onsubmit="return confirm('are you want to delete this doc?')">
-                            <button type="submit" class="delete-btn">Delete</button>
-                            </form>
+                            <%= movie.movieDescript %>
                         </td>
+                        <td>
+                            <%= movie.year %>
+                        </td>
+                        <td>
+                            <%= movie.genres %>
+                        </td>
+                        <td>
+                            <%= movie.rating %>
+                        </td>
+
+                        <% const isOwner=session.user && movie.postedBy &&
+                            movie.postedBy.toString()===session.user._id.toString(); %>
+
+                            <td>
+                                <% if (isOwner) { %>
+                                    <form action="/update/<%= movie.id %>" method="get">
+                                        <button type="submit" class="update-btn">Update</button>
+                                    </form>
+                                    <% } else { %>
+                                        <span>-</span>
+                                        <% } %>
+                            </td>
+                            <td>
+                                <% if (isOwner) { %>
+                                    <form action="/delete/<%= movie._id %>" method="post"
+                                        onsubmit="return confirm('Are you sure you want to delete this movie?')">
+                                        <button type="submit" class="delete-btn">Delete</button>
+                                    </form>
+                                    <% } else { %>
+                                        <span>-</span>
+                                        <% } %>
+                            </td>
+
                     </tr>
                     <% }) %>
             </tbody>
         </table>
-</div>
+    </div>
 
-<%- include('partials/footer') %>
+    <%- include('partials/footer') %>

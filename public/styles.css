@@ -1,4 +1,3 @@
-
 @media screen and (max-width: 768px) {
   .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -19,7 +18,7 @@ h1 {
   margin-bottom: 20px;
 }
 
-.title{
+.title {
   color: #ffffff;
 }
 
@@ -55,7 +54,7 @@ input {
   transition: border-color 0.3s;
 }
 
-input :focus{
+input :focus {
   border-color: #8B95C9;
   outline: none;
 }
@@ -63,7 +62,7 @@ input :focus{
 /* login  Button */
 .login-btn {
   width: 80%;
-  margin:10px;
+  margin: 10px;
   padding: 12px;
   font-size: 18px;
   color: #fff;
@@ -79,21 +78,22 @@ input :focus{
 }
 
 /*Logout Button*/
-.logout-btn{
-width:8%; 
-padding:4px;
-background-color: #3171b5;
-border-color: #3171b5;
-color:#c5c6c9; 
-font-size: 14px;
-font-weight: bold;
-border-radius: 8px;
+.logout-btn {
+  width: 8%;
+  padding: 4px;
+  background-color: #3171b5;
+  border-color: #3171b5;
+  color: #c5c6c9;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 8px;
 }
 
-.logout-btn:hover{
-background-color: #4080a5;
+.logout-btn:hover {
+  background-color: #4080a5;
 
 }
+
 /* registration Button */
 .register-btn {
   width: 80%;
@@ -112,6 +112,7 @@ background-color: #4080a5;
 .register-btn:hover {
   background-color: #5cac60;
 }
+
 header {
   background-color: #1D2F6F;
   padding: 1rem;
@@ -132,12 +133,13 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #FFC6AC; /* Apricot text links */
+  color: #FFC6AC;
+  /* Apricot text links */
   text-decoration: none;
   font-weight: bold;
 }
 
-nav ul li a:hover{
+nav ul li a:hover {
   color: #EF233C;
 }
 
@@ -166,7 +168,9 @@ table {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: left;
@@ -188,7 +192,8 @@ tr:nth-child(even) {
 /* update Button */
 .update-btn {
   padding: 5px 10px;
-  background-color: #1D2F6F; /* Green */
+  background-color: #1D2F6F;
+  /* Green */
   color: white;
   border: none;
   cursor: pointer;
@@ -201,7 +206,8 @@ tr:nth-child(even) {
 /* Delete Button */
 .delete-btn {
   padding: 5px 10px;
-  background-color: #EF233C; /* Red */
+  background-color: #EF233C;
+  /* Red */
   color: white;
   border: none;
   cursor: pointer;
@@ -211,7 +217,7 @@ tr:nth-child(even) {
   background-color: #c91530;
 }
 
-textarea{
+textarea {
   width: 100%;
   padding: 10px;
   margin: 5px;
@@ -222,8 +228,8 @@ textarea{
   transition: border-color 0.3s;
 }
 
-.error-message { 
-  padding:10px;
+.error-message {
+  padding: 10px;
   text-align: left;
   color: #c91530;
   text-decoration: wavy;
