@@ -14,19 +14,16 @@
             <input type="password" id="password" name="password" placeholder="Type your password" required>
         </div>
 
-         <% if (typeof error !== "undefined") { %>
-             <div class="error-message"><%= error %></div>
-         <% } %>
+          <% if (typeof error !== "undefined") { %>
+              <div class="error-message"><%= error %></div>
+          <% } %>
 
-
-        <button type="submit" class="login-btn">Login</button>
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">Login</button>
+            
+            <a href="/registration" class="secondary-btn">Register</a>
+        </div>
         
-    </form>
-
-    <form action="/registration" method="get">
-
-    <button type="submit" class="register-btn">Register</button>
-
     </form>
 </div>
 

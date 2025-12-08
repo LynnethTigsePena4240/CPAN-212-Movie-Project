@@ -20,10 +20,13 @@
         </div>
 
         <% if (typeof error !== "undefined") { %>
-             <div class="error-message"><%= error %></div>
+              <div class="error-message"><%= error %></div>
         <% } %>
 
-        <button type="submit" class="register-btn">Register</button>
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">Register</button>
+        </div>
+        
     </form>
 </div>
 
