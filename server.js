@@ -9,8 +9,9 @@ const Movie = require("./models/movies");
 
 const PORT = process.env.PORT || 8000
 
+require('dotenv').config();
 //connection string for MongoDB cluster
-const CONNECTION_STRING = `mongodb+srv://dbUser:dbUser@cluster0.g7jtlyr.mongodb.net/?appName=Cluster0`
+const CONNECTION_STRING = process.env.MONGO_URI
 
 //configure the server to use EJS template engine
 app.set("view engine", "ejs")
