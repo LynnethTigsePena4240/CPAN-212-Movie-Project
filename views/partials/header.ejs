@@ -12,8 +12,14 @@
         <nav>
             <ul>
                 <li><a href="/movielist">List of Movies</a></li>
-                <li><a href="/insert">Add New Movie</a></li>
+                
+                <li><a href="/insert">Add New Movie</a></li> 
+                
                 <% if (session.user) { %>
+                    <li style="color: #f5c518; font-weight: bold; display: inline; margin-right: 1rem;">
+                        Welcome, <%= session.user.UserName %>!
+                    </li>
+                    
                     <li>
                         <form action="/logout" method="POST" style="display:inline;">
                             <button type="submit" class="logout-btn">Logout</button>

@@ -2,33 +2,36 @@ const mongoose = require('mongoose')
 
 const movieSchema = new mongoose.Schema(
     {
-        movieName:{
+        movieName: {
             type: String,
             required: true
         },
-        movieDescript:{
+        movieDescript: {
             type: String,
             required: true
         },
-        
-        year:{
+
+        year: {
             type: Number,
             required: true
         },
-        genres:{
+        genres: {
             type: String,
             required: true
         },
-        rating:{
+        rating: {
             type: Number,
+            required: true
+        },
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: true
         }
-    })
+    }
+)
 
 
 const Movie = mongoose.model("Movie", movieSchema);
-//students lower case plural colection in mongodb
-//insert document
-//interface for crud with monngodb
-module.exports=Movie;
-    
+
+module.exports = Movie;
